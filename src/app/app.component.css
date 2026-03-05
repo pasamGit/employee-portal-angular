@@ -1,0 +1,29 @@
+.topbar {
+  align-items: center;
+  background: #0f172a;
+  color: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 12px;
+}
+
+.topbar a,
+.topbar button {
+  background: transparent;
+  border: 0;
+  color: #bfdbfe;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 860px;
+  padding: 24px;
+}

@@ -1,0 +1,14 @@
+<header class="topbar">
+  <h1>Employee Portal</h1>
+
+  <nav>
+    <a routerLink="/home">Home</a>
+    <a routerLink="/auth/login" *ngIf="!authService.isLoggedIn()">Login</a>
+    <a routerLink="/auth/register" *ngIf="!authService.isLoggedIn()">Register</a>
+    <button type="button" *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</button>
+  </nav>
+</header>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>

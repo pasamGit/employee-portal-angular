@@ -1,0 +1,98 @@
+<section class="home-card">
+  <header class="home-header">
+    <h2>Home</h2>
+    <p>Manage employee records after login.</p>
+  </header>
+
+  <form class="employee-form" (ngSubmit)="submit()" #employeeForm="ngForm">
+    <h3>{{ editingIdentifier === null ? 'Add Employee' : 'Edit Employee' }}</h3>
+
+    <label>
+      Name
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="form.name"
+        maxlength="100"
+        required
+      />
+    </label>
+
+    <label>
+      Email
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="form.email"
+        maxlength="150"
+        required
+      />
+    </label>
+
+    <label>
+      Department
+      <input
+        type="text"
+        name="department"
+        [(ngModel)]="form.department"
+        maxlength="100"
+        required
+      />
+    </label>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="employeeForm.invalid || saving">
+        {{ editingIdentifier === null ? 'Create' : 'Update' }}
+      </button>
+      <button
+        type="button"
+        class="secondary"
+        *ngIf="editingIdentifier !== null"
+        (click)="cancelEdit()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p class="status" *ngIf="loading">Loading employees...</p>
+
+  <table *ngIf="!loading && employees.length > 0" class="employee-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of employees">
+        <td>{{ e.name }}</td>
+        <td>{{ e.email }}</td>
+        <td>{{ e.department }}</td>
+        <td class="actions">
+          <button type="button" class="secondary" (click)="startEdit(e)">
+            Edit
+          </button>
+          <button type="button" class="danger" (click)="remove(e)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="status" *ngIf="!loading && employees.length === 0">
+    No employees found on this page.
+  </p>
+
+  <div class="pagination">
+    <button type="button" [disabled]="page === 0 || loading" (click)="previousPage()">
+      Prev
+    </button>
+    <span>Page {{ page + 1 }}</span>
+    <button type="button" [disabled]="loading" (click)="nextPage()">Next</button>
+  </div>
+</section>
